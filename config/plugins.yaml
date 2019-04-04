@@ -146,6 +146,7 @@
 - { repo: vim-ruby/vim-ruby, on_ft: ruby }
 - { repo: keith/swift.vim, on_ft: swift }
 - { repo: rust-lang/rust.vim, on_ft: rust }
+- { repo: racer-rust/vim-racer, on_ft: rust }
 - { repo: vim-jp/syntax-vim-ex, on_ft: vim }
 - { repo: chrisbra/csv.vim, on_ft: csv }
 - { repo: tpope/vim-git, on_ft: [ gitcommit, gitrebase, gitconfig ]}
@@ -296,32 +297,14 @@
     let g:SignatureIncludeMarkers = repeat('⚐', 10)
     autocmd user_events User GitGutter call signature#sign#Refresh()
 
-- repo: nathanaelkane/vim-indent-guides
-  on_cmd: [ IndentGuidesEnable, IndentGuidesDisable, IndentGuidesToggle ]
-  hook_post_source: |
-    call indent_guides#init_script_vars()
-    call indent_guides#highlight_colors()
-  hook_add: |
-    let g:indent_guides_color_change_percent = 3
-    let g:indent_guides_autocmds_enabled = 0
-    let g:indent_guides_default_mapping = 0
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_indent_levels = 25
-    let g:indent_exclude = [ 'help', 'denite', 'codi' ]
-    augroup user_plugin_indentguides
-      autocmd!
-      autocmd BufEnter *
-      \ if ! empty(&l:filetype) && index(g:indent_exclude, &l:filetype) == -1
-      \|   if g:indent_guides_autocmds_enabled == 0 && &l:expandtab
-      \|     IndentGuidesEnable
-      \|   elseif g:indent_guides_autocmds_enabled == 1 && ! &l:expandtab
-      \|     IndentGuidesDisable
-      \|   endif
-      \| endif
-    augroup END
-    if ! has('vim_starting')
-      doautocmd <nomodeline> user_plugin_indentguides BufEnter
-    endif
+- repo: MattesGroeger/vim-bookmarks
+  on_path: .*
+  hook_source: |
+    let g:bookmark_auto_save_file = $VARPATH.'/bookmarks'
+    let g:bookmark_no_default_key_mappings = 1
+    let g:bookmark_disable_ctrlp = 1
+
+- { repo: hotwatermorning/auto-git-diff, on_ft: gitrebase }
 
 - repo: rhysd/committia.vim
   on_path: COMMIT_EDITMSG

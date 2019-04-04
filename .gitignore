@@ -3,6 +3,8 @@
 /spell/
 /.vault.vim
 /.local.vimrc
+/config/local.plugins.yaml
+*~
 /.stignore
 /.stfolder
 /.stversions
